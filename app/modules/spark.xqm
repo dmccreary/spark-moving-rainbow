@@ -55,3 +55,33 @@ let $xml-pairs := xqjson:parse-json($json-string)
 return
    jpx:json-pairs-to-element($xml-pairs)
 };
+
+declare function s:device-status-html() as element() {
+let $access-token := $config:access-token
+(: https://api.spark.io/v1/devices?access_token=ae47... :)
+let $url := xs:anyURI(concat($s:spark-url-prefix, '?access_token=', $access-token))
+let $base-64-binary := httpclient:get($url, false(), <headers/>) 
+let $json-string := util:base64-decode($base-64-binary/httpclient:body)
+let $xml-pairs := xqjson:parse-json($json-string)
+let $xml-element-names := jpx:json-pairs-to-element($xml-pairs)
+return
+<table class="table table-striped table-bordered table-hover table-condensed">
+   <thead>
+     <tr>
+        <th>Name</th>
+        <th>Value</th>
+     </tr>
+   </thead>
+    <tbody>{
+    for $element in $xml-element-names/item/*
+    return
+       <tr>
+          <th>{name($element)}</th>
+          <td>{$element/text()}</td>
+       </tr>
+    }
+    </tbody>
+</table>
+};
+
+   

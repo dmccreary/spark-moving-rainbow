@@ -1,0 +1,88 @@
+body {
+   background-color: #ddd; /* #ddd is a light gray */ 
+   font-family: arial, helvetica, sans-serif;
+   margin: auto;
+   }
+
+/* Text alignment classes */
+.center {text-align: center!important;}
+.right {text-align: right!important;}
+.left {text-align: left!important;}
+
+.page-title {color: darkblue; font-size:larger; font-weight: bold;}
+
+table thead tr th {background-color: silver;}
+
+#header {background-color: white;} /* the dark gray from the MNHS home page site. */
+
+#banner {
+    font-size: 10pt;
+}
+
+#banner-search  {
+  /* border: solid blue 1px; */
+  }
+  
+#banner-form-search {
+    display: inline;
+    margin-left: 30px;
+  }
+  
+#banner-form-search input {
+  /* border: solid blue 1px; */
+  font-size: 10pt;
+  }
+#footer {
+    clear: both;
+}
+
+.layout-vertical {
+    /*border: solid red 1px; */
+    margin: 5px;
+}
+
+/* container is the main part of the form */
+.container {
+    background-color: white;
+    border: solid gray 1px;
+    padding-left: 10px;
+    padding-right: 20px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+
+/* all Orbeon controls that hold numbers must be right aligned per this rule */
+.number .xforms-input {
+    text-align: right;
+}
+
+
+
+.debug {background: khaki;}
+.warn {background: pink}
+
+/* used for previous and next links */
+a.prev, a.next {background-color: white; border: solid #d5c8b2 1px; border-style: groove; padding: 2px; width: 80px; text-align: center;}
+
+a.list-pending {background-color: white; border: solid #d5c8b2 1px; border-style: groove; padding: 2px; width: 160px; text-align: center;}
+
+
+/* todo make these consistent */
+.gray-text {color:silver;}
+.text-light-gray {color:silver;}
+.text-gray {color:gray;}
+.text-red {color:red;}
+.text-green {color:green;}
+
+/* Any table body cell (td or th) that has any numeric control will be right aligned. */
+table tbody tr td.number, table tbody tr th.number {text-align: right;}
+
+table thead tr th {text-align: center;}
+table tbody tr td.border-left, table thead tr th.border-left {border-left: solid black 1px;}
+table tbody tr td.border-right, table thead tr th.border-right {border-right: solid black 1px;}
+
+input[type=checkbox] {width:20px; height:20px;}
+
+.float-right {float:right;}

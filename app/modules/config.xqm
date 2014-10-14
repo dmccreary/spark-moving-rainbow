@@ -25,6 +25,7 @@ declare variable $config:config-file-path := concat($config:app-home-collection,
 declare variable $config:config := doc($config:config-file-path)/config;
 
 declare variable $config:app-version := $config:config/app-version/text();
+declare variable $config:last-updated-date := $config:config/last-updated-date/text();
 
 (: all the pending updates will go into this file :)
 declare variable $config:pending-update-file-name := 'pending-updates.xml';

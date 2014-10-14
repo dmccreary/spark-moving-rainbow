@@ -87,7 +87,7 @@ declare function style:header()  as node()*  {
         <div id="banner">
             <span id="logo">
                <a href="{$style:rest-path-to-site}/index.xq">
-                   <img src="{$style:rest-path-to-images}/mhs-logo-145-white.png" alt="Minnesota Historical Society"/>
+                   <img src="{$style:rest-path-to-images}/spark-header.png" alt="Spark logo" height="60px"/>
                </a>
              </span>   
         </div>
@@ -145,7 +145,7 @@ declare function style:assemble-page($title as xs:string*, $breadcrumbs as node(
     <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <link rel="shortcut icon" href="{$style:rest-path-to-style-resources}/images/mnhs-logo-75px.png"/>
+            <link rel="shortcut icon" href="{$style:rest-path-to-style-resources}/images/spark-white-on-blue.png"/>
             <title>{$title}</title>
             {style:css('xhtml')}
             {if (string-length($style) gt 0)
@@ -226,7 +226,7 @@ let $form :=
       >
         <head>
             <title>{ $title }</title>
-            <link rel="shortcut icon" href="{$style:rest-path-to-style-resources}/images/mnhs-logo-75px.png"/>
+            <link rel="shortcut icon" href="{$style:rest-path-to-style-resources}/images/spark-white-on-blue.png"/>
             <link rel="stylesheet" href="{$style:rest-path-to-style-resources}/css/bootstrap.min.css" type="text/css" media="screen, projection"/>
             {$model}
             {style:css('xforms')}

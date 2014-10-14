@@ -1,0 +1,10 @@
+<!-- configuration file for Spark.io test -->
+<config>
+    <app-version>0.1</app-version>
+    <last-updated-date>2014-10-14</last-updated-date>
+    <!-- <admin-password></admin-password> -->
+    <device-id>53ff6c066667574811382567</device-id>
+    <device-name>dan-test</device-name>
+    <access-token>ae476f23112777c8000993a485f6bd453968273b</access-token>
+    <debug>true</debug>
+</config>
