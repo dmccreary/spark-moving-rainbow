@@ -26,3 +26,35 @@ Response
   "cc3000_patch_version": "1.29"
 }
 
+https://api.spark.io/v1/devices/53ff6c066667574811382567/led1?access_token=ae476f23112777c8000993a485f6bd453968273b
+
+
+https://api.spark.io/v1/devices/53ff6c066667574811382567?access_token=ae476f23112777c8000993a485f6bd453968273b
+
+{
+  "id": "53ff6c066667574811382567",
+  "name": "dan-test-1",
+  "connected": true,
+  "variables": {
+    "analogvalue": "int32"
+  },
+  "functions": [
+    "led"
+  ],
+  "cc3000_patch_version": "1.29"
+}
+
+Read a value
+
+https://api.spark.io/v1/devices/53ff6c066667574811382567/analogvalue?access_token=ae476f23112777c8000993a485f6bd453968273b
+{
+  "cmd": "VarReturn",
+  "name": "analogvalue",
+  "result": 1278,
+  "coreInfo": {
+    "last_app": "",
+    "last_heard": "2014-10-14T18:33:45.208Z",
+    "connected": true,
+    "deviceID": "53ff6c066667574811382567"
+  }
+}

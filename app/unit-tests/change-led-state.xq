@@ -65,9 +65,10 @@ let $content :=
             <xf:send submission="led-change" ev:event="xforms-value-changed"/>
       </xf:select1>
       
-      <xf:submit submission="led-change">
+      <!-- <xf:submit submission="led-change">
          <xf:label>Submit</xf:label>
       </xf:submit>
+      -->
       
 </div>
 
