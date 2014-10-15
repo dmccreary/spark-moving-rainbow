@@ -34,7 +34,13 @@ local-password=
 local-backup-dir=/tmp
 ```
 
-cd into build and run
+cd into build and run:
+
+```
+#!python
+
 ant -p
+```
+
 
 If you don't have ant you can upload the app directory into /db/apps/spark on eXist-db.
