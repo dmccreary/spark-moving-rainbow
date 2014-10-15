@@ -21,8 +21,12 @@ declare variable $config:web-base := concat($config:exist-host, $config:context)
 
 declare variable $config:app-id := 'spark';
 declare variable $config:app-home-collection := concat('/db/apps/', $config:app-id);
+
 declare variable $config:config-file-path := concat($config:app-home-collection, '/config.xml');
 declare variable $config:config := doc($config:config-file-path)/config;
+
+declare variable $config:credentials-file-path := concat($config:app-home-collection, '/credentials.xml');
+declare variable $config:credentials := doc($config:credentials-file-path)/credentials;
 
 declare variable $config:app-version := $config:config/app-version/text();
 declare variable $config:last-updated-date := $config:config/last-updated-date/text();
@@ -32,12 +36,12 @@ declare variable $config:pending-update-file-name := 'pending-updates.xml';
 
 (: look for a device id - if not return an error :)
 declare variable $config:device-id :=
-   if ($config:config/device-id)
-     then $config:config/device-id/text()
+   if ($config:credentials/device-id)
+     then $config:credentials/device-id/text()
      else 'Error - no device-id found in config.xml';
 
 (: look for a device id - if not return an error :)
 declare variable $config:access-token :=
-   if ($config:config/access-token)
-     then $config:config/access-token/text()
-     else 'Error - no access-token found in config.xml';
+   if ($config:credentials/access-token)
+     then $config:credentials/access-token/text()
+     else 'Error - no access-token found in credentials.xml';

@@ -21,14 +21,13 @@ declare variable $s:spark-url-prefix := 'https://api.spark.io/v1/devices/';
 (: send a param and values using the REST API.  We assume that the the $config file has
    both the device and the access-token :)
 declare function s:send($params as xs:string, $config as element()) as xs:string {
-let $device-id := $config/device-id/text()
-let $access-token := $config/access-token/text()
+let $device-id := $config:device-id
+let $access-token := $config:access-token
 return concat($s:spark-url-prefix, $device-id, '/?access_token=', $access-token, '&amp;params=',$params)
 };
 
 declare function s:device-status-json-string() as xs:string {
 let $access-token := $config:access-token
-(: https://api.spark.io/v1/devices?access_token=ae47... :)
 let $url := xs:anyURI(concat($s:spark-url-prefix, '?access_token=', $access-token))
 let $base-64-binary := httpclient:get($url, false(), <headers/>) 
 return util:base64-decode($base-64-binary/httpclient:body)
