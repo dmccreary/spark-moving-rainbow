@@ -1,0 +1,75 @@
+<project xmlns:xdb="http://exist-db.org/ant" default="load-app" name="Grant Solutions XForm Unit Test Framework">
+    <description>Build file for MNHS project</description>
+    
+    <!-- this is where we set our exist-home, local-uri user, password and the place that we will load the docs -->
+    <!-- you can find a template for the values in local.properties.tmpl -->
+    <property file="local.properties"/>
+    
+    <!-- this tells us where to find the key jar files relative to the ${exist-home} property
+        The key here is that the jar files on your local system used by this build script
+        MUST be at the same level as your server.
+    -->
+    <path id="classpath.core">
+        <fileset dir="${exist-home}/lib/core">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${exist-home}/exist.jar"/>
+        <pathelement path="${exist-home}/exist-optional.jar"/>
+    </path>
+    <typedef resource="org/exist/ant/antlib.xml" uri="http://exist-db.org/ant">
+        <classpath refid="classpath.core"/>
+    </typedef>
+    
+    <target name="echo-properties" description="Check properties are set in the local.properties file.">
+        <echo message="The following properties must be set correctly in your local.properties file."/>
+        <echo message="exist-home=${exist-home}"/>
+        <echo message="local-host=${local-host}"/>
+        <echo message="git-master=${git-master}"/>
+        <echo message="app-collection-uri=${app-collection-uri}"/>
+        <echo message="local-user=${local-user}"/>
+        <echo message="local-user=${local-password}"/>
+    </target>
+    
+    <target name="load-app" description="Load the app into the local eXist database">
+        <echo message="Loading MNHS App to local eXist database"/>
+        <echo message="From ${git-master}"/>
+        <echo message="To ${app-collection-uri}"/>
+        <xdb:store uri="${app-collection-uri}" createcollection="true" createsubcollections="true" 
+            user="${local-user}" password="${local-password}">
+            <fileset dir="${git-master}/app"/> 
+        </xdb:store>
+        <!-- make the controller.xql file executable -->
+        <xdb:chmod uri="${local-uri}/apps/${app-id}" resource="controller.xql" permissions="group=+execute,other=+execute"
+            user="${local-user}" password="${local-password}"/>  
+    </target>
+    
+    <target name="add-execute"  description="Make the controller.xql file executable.">
+        <!-- make the controller.xql file executable -->
+        <echo message="Adding execute to ${local-uri}/apps/spark/scripts/echo-post.xq"/>
+        <xdb:chmod uri="${local-uri}/apps/spark" resource="controller.xql" permissions="group=+execute,other=+execute"
+            user="${local-user}" password="${local-password}"/>
+        <xdb:chmod uri="${local-uri}/apps/spark/scripts" resource="echo-post.xq" permissions="group=+execute,other=+execute"
+            user="${local-user}" password="${local-password}"/>
+    </target>
+    
+    <target name="update-xsltforms">
+        <echo message="download the latest version of XSLT forms and put it in the /db/apps/xsltforms"/>
+        
+    </target>
+    
+    <target name="xar"  description="Build an exist package for the app xar file.">
+        <!-- note, still need to add the package description files -->
+        <echo message="Creating an eXist app package for all files in /db/apps/spark.  Because the data has been removed you will also
+            need to run the data loader task."/>
+        <mkdir dir="packages"/>
+        <zip basedir="../db/apps/spark" destfile="packages/spark.xar"/>
+    </target>
+    
+    <target name="reload-xsltforms" description="Reload XSLTForms">
+        <xdb:store uri="${local-uri}/apps/xsltforms" createcollection="true" createsubcollections="true" 
+            user="${local-user}" password="${local-password}">
+            <fileset dir="${git-master}/libs/xsltforms"/> 
+        </xdb:store>
+    </target>
+    
+</project>
