@@ -11,7 +11,7 @@ To build from source you will need Apache Ant and Java installed.
 Add the following to your spark/git/info/exclude:
 
 ...
-#!java
+#!python
 app/credentials.xml
 build/local.properties
 build/packages/spark.xar
