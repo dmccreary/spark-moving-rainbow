@@ -109,3 +109,16 @@ let $headers :=
 let $result := util:base64-decode(httpclient:post($url, '', false(), $headers))
 return $result
 };
+
+declare function s:new-pattern($pattern-value as xs:string) as xs:string {
+let $url := xs:anyURI(concat($s:spark-url-prefix, $config:device-id, '/pattern'))
+let $headers :=
+   <headers>
+      <header name="Authorization" 
+              value='Bearer {$config:access-token}'/>
+      <header name="args" 
+              value="{$pattern-value}"/>
+   </headers>
+let $result := util:base64-decode(httpclient:post($url, '', false(), $headers))
+return $result
+};

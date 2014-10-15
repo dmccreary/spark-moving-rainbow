@@ -12,6 +12,9 @@ let $content :=
      
      Application Version: <b>{$config:app-version}</b> Last updated: {$config:last-updated-date}<br/>
      
+     <h2>Forms</h2>
+     <a href="forms/change-led-strip-pattern.xq">Change LED Strip Pattern</a><br/>
+     
      <a href="unit-tests/index.xq">Unit Tests</a><br/>
      
      

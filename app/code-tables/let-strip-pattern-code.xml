@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<code-table>
+    <name>led-strip-pattern-code</name>
+    <items>
+        <item>
+            <label>Solid Red</label>
+            <value>solid-red</value>
+        </item>
+        <item>
+            <label>Solid Orange</label>
+            <value>solid-orange</value>
+        </item>
+        <item>
+            <label>Solid Yellow</label>
+            <value>solid-yellow</value>
+        </item>
+        <item>
+            <label>Solid Green</label>
+            <value>solid-green</value>
+        </item>
+        <item>
+            <label>Solid Blue</label>
+            <value>solid-blue</value>
+        </item>
+        <item>
+            <label>Solid Indigo</label>
+            <value>solid-indigo</value>
+        </item>
+        <item>
+            <label>Solid Violet</label>
+            <value>solid-violet</value>
+        </item>
+    </items>
+</code-table>
