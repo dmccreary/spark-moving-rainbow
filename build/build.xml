@@ -39,12 +39,17 @@
             <fileset dir="${git-master}/app"/> 
         </xdb:store>
         <!-- make the controller.xql file executable -->
-        <xdb:chmod uri="${local-uri}/apps/${app-id}" resource="controller.xql" permissions="group=+execute,other=+execute"/>  
+        <xdb:chmod uri="${local-uri}/apps/${app-id}" resource="controller.xql" permissions="group=+execute,other=+execute"
+            user="${local-user}" password="${local-password}"/>  
     </target>
     
     <target name="add-execute"  description="Make the controller.xql file executable.">
         <!-- make the controller.xql file executable -->
-        <xdb:chmod uri="${local-uri}/apps/spark" resource="controller.xql" permissions="group=+execute,other=+execute"/>
+        <echo message="Adding execute to ${local-uri}/apps/spark/scripts/echo-post.xq"/>
+        <xdb:chmod uri="${local-uri}/apps/spark" resource="controller.xql" permissions="group=+execute,other=+execute"
+            user="${local-user}" password="${local-password}"/>
+        <xdb:chmod uri="${local-uri}/apps/spark/scripts" resource="echo-post.xq" permissions="group=+execute,other=+execute"
+            user="${local-user}" password="${local-password}"/>
     </target>
     
     <target name="update-xsltforms">
