@@ -14,7 +14,8 @@ if (not($new-state = 'on' or $new-state = 'off'))
        <message>Error, the new state must be 'on' or 'off'.  Got "{$new-state}"</message>
      </error>
      else (: continue :)
-
+     
+let $start-time := util:system-time()
 let $change-state :=
    if ($new-state = 'on')
       then s:function('ledsOn')
@@ -29,4 +30,5 @@ return
 <led-state-change>
   <new-state>{$new-state}</new-state>
   <spark-response>{$change-state}</spark-response>
+  <response-time>{((util:system-time() - $start-time) div xs:dayTimeDuration('PT1S')) * 1000}</response-time>
 </led-state-change>

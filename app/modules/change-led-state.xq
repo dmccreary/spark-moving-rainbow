@@ -5,7 +5,7 @@ import module namespace config = "http://danmccreary.com/config" at "../modules/
 
 declare namespace xf="http://www.w3.org/2002/xforms";
 declare namespace ev="http://www.w3.org/2001/xml-events";
-let $title := 'XForms Template'
+let $title := 'Demo of call function using Spark.io'
 
 (: all-codes.xq - get all the code tables for an XForms edit form :)
 let $debug := xs:boolean(request:get-parameter('debug', 'false'))
@@ -20,9 +20,11 @@ let $better-form-enable :=
 let $style := 
 <style>
 body{{font-family: helvetica, ariel, sans-serif;}}
+.container {{margin-left: 5ex;}}
 .xforms-control {{display:block;}}
-.xforms-label {{display:inline-block; width: 10ex; font-weight: bold; text-align: right; font-size: 10pt; margin-right: 1ex;}}
+.xforms-label {{display:inline-block; font-weight: bold; font-size: 10pt; margin-right: 1ex;}}
 a.horizontal-links {{padding: 5px;}}
+.xforms-item {{margin-left: 5ex;}}
 </style>
 
 let $model :=
@@ -52,7 +54,7 @@ let $content :=
 <div class="content">
       
       <xf:select1 ref="new-state" appearance="full" incremental="true">
-         <xf:label>Turn LEDs</xf:label>
+         <xf:label>Turn LEDs:</xf:label>
             <xf:item>
                <xf:label>On</xf:label>
                <xf:value>on</xf:value>
@@ -70,7 +72,7 @@ let $content :=
       </xf:submit>
       -->
       <xf:output ref="instance('spark-result')/response-time">
-         <xf:label>Response Time (ms)</xf:label>
+         <xf:label>Response Time (ms):</xf:label>
       </xf:output>
       
 </div>

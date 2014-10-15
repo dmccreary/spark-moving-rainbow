@@ -82,8 +82,6 @@ then 4 else 3
 :)
 declare function style:header()  as node()*  {
     <div id="header">
-        
-       
         <div id="banner">
             <span id="logo">
                <a href="{$style:rest-path-to-site}/index.xq">
@@ -92,6 +90,7 @@ declare function style:header()  as node()*  {
              </span>   
         </div>
         <div class="banner-seperator-bar"/>
+        <hr/>
     </div>   
 };
 
@@ -99,7 +98,7 @@ declare function style:footer()  as node()*  {
 <div id="footer">
    <div class="banner-seperator-bar"/>
    <hr/>
-   <div id="footer-text" style="text-align: center;">Copyright 2014 {$style:app-name}. All rights reserved.
+   <div id="footer-text" style="text-align: center;">Copyright 2014 Kelly-McCreary &amp; Associates.
       <a href="mailto:dan@danmccreary.com">Feedback</a>
    </div>
 </div>
