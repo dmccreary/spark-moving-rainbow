@@ -10,12 +10,9 @@ To build from source you will need Apache Ant and Java installed.
 
 Add the following to your spark/git/info/exclude:
 
-...
-#!java
-app/credentials.xml
-build/local.properties
-build/packages/spark.xar
-...
+* app/credentials.xml
+* build/local.properties
+* build/packages/spark.xar
 
 Setup the build/local.properties from the templates:
 
@@ -34,7 +31,11 @@ local-password=
 local-backup-dir=/tmp
 ```
 
-cd into build and run
+cd into build and run:
+
+```
 ant -p
+```
+
 
 If you don't have ant you can upload the app directory into /db/apps/spark on eXist-db.
