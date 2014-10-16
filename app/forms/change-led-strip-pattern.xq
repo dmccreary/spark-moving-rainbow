@@ -21,15 +21,14 @@ let $style :=
 <style>
 body{{font-family: helvetica, ariel, sans-serif;}}
 .xforms-control {{display:block;}}
-.xforms-label {{display:inline-block; width: 10ex; font-weight: bold; text-align: right; font-size: 10pt; margin-right: 1ex;}}
-a.horizontal-links {{padding: 5px;}}
+.xforms-label {{display:inline-block; width: 15ex; font-weight: bold; text-align: left; font-size: 10pt; margin-right: 1ex;}}
+.xforms-item {{margin-left: 5ex;}}
 </style>
 
 let $model :=
 <xf:model>
    <xf:instance id="led-status" xmlns="">
       <data>
-            <new-state></new-state>
             <new-pattern></new-pattern>
       </data>
    </xf:instance>
@@ -39,12 +38,6 @@ let $model :=
    <xf:instance id="spark-result" xmlns="">
       <null/>   
    </xf:instance>
-   
-   <xf:submission id="led-change" method="get" 
-      replace="instance" instance="spark-result"
-      serialization="none" mode="synchronous" mediatype="text/xml">
-      <xf:resource value="concat('../scripts/led-state-change.xq?new-state=', new-state)"/>
-   </xf:submission>
    
    <xf:submission id="change-pattern" method="get" 
       replace="instance" instance="spark-result"
@@ -56,9 +49,9 @@ let $model :=
 
 let $content :=
 <div class="content">
-      
-      <xf:select1 ref="new-state" appearance="full" incremental="true">
-         <xf:label>Change Pattern</xf:label>
+      <h4>{$title}</h4>
+      <xf:select1 ref="new-pattern" appearance="full" incremental="true">
+         <xf:label>Change Pattern:</xf:label>
             <xf:itemset ref="instance('code-table')//item">
                <xf:label ref="label"/>
                <xf:label ref="value"/>

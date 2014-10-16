@@ -237,7 +237,6 @@ let $form :=
             <div class="container">
                 {style:header()} 
                 {style:breadcrumbs(())}
-                <h2>{$title}</h2>
                 {$content}
                 {style:footer()}
             </div>

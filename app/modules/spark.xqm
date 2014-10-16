@@ -18,12 +18,37 @@ curl https://api.spark.io/v1/devices/0123456789abcdef/led \
 
 declare variable $s:spark-url-prefix := 'https://api.spark.io/v1/devices/';
 
-(: send a param and values using the REST API.  We assume that the the $config file has
-   both the device and the access-token :)
-declare function s:send($params as xs:string, $config as element()) as xs:string {
-let $device-id := $config:device-id
-let $access-token := $config:access-token
-return concat($s:spark-url-prefix, $device-id, '/?access_token=', $access-token, '&amp;params=',$params)
+(: list all devices associated with this access-token :)
+declare function s:get-device-info() as xs:string {
+let $url :=
+    concat($s:spark-url-prefix, $config:device-id, 
+       '?access_token=', $config:access-token)
+let $base-64-binary := httpclient:get(xs:anyURI($url), false(), <headers/>)
+return util:base64-decode($base-64-binary/httpclient:body)
+};
+
+(: list all devices associated with this access-token :)
+declare function s:devices() as xs:string {
+let $headers :=
+   <headers>
+      <header name="Authorization" 
+              value='Bearer {$config:access-token}'/>
+   </headers>
+let $url := xs:anyURI($s:spark-url-prefix)
+let $base-64-binary := httpclient:get($url, false(), $headers)
+return util:base64-decode($base-64-binary/httpclient:body)
+};
+
+(: get the value of a variable of the default device :)
+declare function s:value($variable as xs:string) as xs:string {
+let $headers :=
+   <headers>
+      <header name="Authorization" 
+              value='Bearer {$config:access-token}'/>
+   </headers>
+let $url := xs:anyURI(concat($s:spark-url-prefix, $config:device-id, '/', $variable))
+let $base-64-binary := httpclient:get($url, false(), $headers)
+return util:base64-decode($base-64-binary/httpclient:body)
 };
 
 declare function s:device-status-json-string() as xs:string {
@@ -107,6 +132,33 @@ let $headers :=
               value='Bearer {$config:access-token}'/>
    </headers>
 let $result := util:base64-decode(httpclient:post($url, '', false(), $headers))
+return $result
+};
+
+(: execute a function with a specific name, no parameters 
+   returns a simple JSON string
+   
+   Call a function exposed by the core, 
+   with arguments passed in request body, e.g., POST /v1/devices/0123456789abcdef01234567/brew
+   
+   int brew(String args)
+   ...
+   -d "args=202,230"
+   :)
+declare function s:function-params($function-name as xs:string, $params as xs:string) as xs:string {
+let $url := xs:anyURI(concat($s:spark-url-prefix, $config:device-id, '/', $function-name))
+let $content-length := string-length($params) + 2
+let $content := concat('p=', $params)
+let $headers :=
+   <headers>
+      <header name="Authorization" 
+              value="Bearer {$config:access-token}"/>
+      <header name="Content-Type" 
+              value="application/x-www-form-urlencoded"/>
+      <header name="Content-Length" 
+              value="{$content-length}"/>
+   </headers>
+let $result := util:base64-decode(httpclient:post($url, $content, false(), $headers))
 return $result
 };
 
