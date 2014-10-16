@@ -1,0 +1,32 @@
+<test-status>
+    <test>
+        <file>device-connected.xq</file>
+        <desc>Test if the device is connected using s:device-connected()</desc>
+        <status>pass</status>
+    </test>
+    <test>
+        <file>device-status.xq</file>
+        <desc>Get device status</desc>
+        <status>pass</status>
+    </test>
+    <test>
+        <file>device-status-xml.xq</file>
+        <desc>Get device status in standard element name XML</desc>
+        <status>pass</status>
+    </test>
+    <test>
+        <file>device-status-xml-pairs.xq</file>
+        <desc>Get device status in JSON pair format XML</desc>
+        <status>pass</status>
+    </test>
+    <test>
+        <file>device-status-json.xq</file>
+        <desc>Get device status in JSON format</desc>
+        <status>pass</status>
+    </test>
+    <test>
+        <file>device-status-html.xq</file>
+        <desc>Get device status in HTML format</desc>
+        <status>pass</status>
+    </test>
+</test-status>

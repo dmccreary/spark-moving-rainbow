@@ -58,10 +58,11 @@ let $content :=
 <div class="content">
       
       <xf:select1 ref="new-state" appearance="full" incremental="true">
-         <xf:label>Turn LEDs</xf:label>
+         <xf:label>Change Pattern</xf:label>
             <xf:itemset ref="instance('code-table')//item">
                <xf:label ref="label"/>
                <xf:label ref="value"/>
+            </xf:itemset>
             <!-- fire off a new submisison any time this value changes -->
             <xf:send submission="change-pattern" ev:event="xforms-value-changed"/>
       </xf:select1>
