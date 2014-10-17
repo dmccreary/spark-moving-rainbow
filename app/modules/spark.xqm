@@ -162,15 +162,20 @@ let $result := util:base64-decode(httpclient:post($url, $content, false(), $head
 return $result
 };
 
-declare function s:new-pattern($pattern-value as xs:string) as xs:string {
-let $url := xs:anyURI(concat($s:spark-url-prefix, $config:device-id, '/pattern'))
+(: possible new patten values are: rainbow, red, white, dim etc. :)
+declare function s:new-pattern($new-pattern-name as xs:string) as xs:string {
+let $url := xs:anyURI(concat($s:spark-url-prefix, $config:device-id, '/changePat'))
+let $content := concat('p=', $new-pattern-name)
+let $content-length := string-length($content)
 let $headers :=
    <headers>
       <header name="Authorization" 
               value='Bearer {$config:access-token}'/>
-      <header name="args" 
-              value="{$pattern-value}"/>
+      <header name="Content-Type" 
+              value="application/x-www-form-urlencoded"/>
+      <header name="Content-Length" 
+              value="{$content-length}"/>
    </headers>
-let $result := util:base64-decode(httpclient:post($url, '', false(), $headers))
+let $result := util:base64-decode(httpclient:post($url, $content, false(), $headers))
 return $result
 };

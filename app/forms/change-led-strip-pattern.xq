@@ -17,6 +17,14 @@ let $better-form-enable :=
      then ()
      else request:set-attribute("betterform.filter.ignoreResponseBody", "true")
 
+(:
+<xf:instance id="code-tables" xmlns="" src="all-codes.xq"/>
+<xf:itemset ref="instance('code-tables')/code-table/items/item">
+           <xf:label ref="./label"/>
+           <xf:label ref="./value"/>
+</xf:itemset>
+:)
+
 let $style := 
 <style>
 body{{font-family: helvetica, ariel, sans-serif;}}
@@ -27,13 +35,14 @@ body{{font-family: helvetica, ariel, sans-serif;}}
 
 let $model :=
 <xf:model>
-   <xf:instance id="led-status" xmlns="">
+   <xf:instance id="spark-state" xmlns="">
       <data>
-            <new-pattern></new-pattern>
+            <new-state></new-state>
+            <pattern>rainbow</pattern>
       </data>
    </xf:instance>
    
-   <xf:instance id="code-table" xmlns="" src="../code-tables/led-strip-pattern-code.xml"/>
+   
    
    <xf:instance id="spark-result" xmlns="">
       <null/>   
@@ -42,7 +51,13 @@ let $model :=
    <xf:submission id="change-pattern" method="get" 
       replace="instance" instance="spark-result"
       serialization="none" mode="synchronous" mediatype="text/xml">
-      <xf:resource value="concat('../scripts/change-pattern.xq?new-pattern=', new-state)"/>
+      <xf:resource value="concat('../scripts/new-pattern.xq?new-pattern=', instance('spark-state')/pattern)"/>
+   </xf:submission>
+   
+   <xf:submission id="led-change" method="get" 
+      replace="instance" instance="spark-result"
+      serialization="none" mode="synchronous" mediatype="text/xml">
+      <xf:resource value="concat('../scripts/led-state-change.xq?new-state=', instance('spark-state')/new-state)"/>
    </xf:submission>
    
 </xf:model>
@@ -50,20 +65,100 @@ let $model :=
 let $content :=
 <div class="content">
       <h4>{$title}</h4>
-      <xf:select1 ref="new-pattern" appearance="full" incremental="true">
+      
+      <xf:output ref="pattern">
+         <xf:label>Current Pattern:</xf:label>
+      </xf:output>
+      
+      <xf:select1 ref="pattern" appearance="full">
          <xf:label>Change Pattern:</xf:label>
-            <xf:itemset ref="instance('code-table')//item">
-               <xf:label ref="label"/>
-               <xf:label ref="value"/>
-            </xf:itemset>
+            <xf:item>
+               <xf:label>Rainbow</xf:label>
+               <xf:value>rainbow</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Red</xf:label>
+               <xf:value>red</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Orange</xf:label>
+               <xf:value>orange</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Yellow</xf:label>
+               <xf:value>yellow</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Green</xf:label>
+               <xf:value>green</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Blue</xf:label>
+               <xf:value>blue</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Indigo</xf:label>
+               <xf:value>indigo</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Violet</xf:label>
+               <xf:value>violet</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>White</xf:label>
+               <xf:value>white</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Dim</xf:label>
+               <xf:value>dim</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Race</xf:label>
+               <xf:value>race</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Color Wipe</xf:label>
+               <xf:value>colorwipe</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Color 100</xf:label>
+               <xf:value>color100</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Color All 200</xf:label>
+               <xf:value>colorall200</xf:value>
+            </xf:item>
             <!-- fire off a new submisison any time this value changes -->
             <xf:send submission="change-pattern" ev:event="xforms-value-changed"/>
       </xf:select1>
       
-      <!-- <xf:submit submission="led-change">
+      
+      <xf:select1 ref="new-state" appearance="full" incremental="true">
+         <xf:label>Turn LEDs:</xf:label>
+            <xf:item>
+               <xf:label>On</xf:label>
+               <xf:value>on</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Off</xf:label>
+               <xf:value>off</xf:value>
+            </xf:item>
+            <!-- fire off a new submisison any time this value changes -->
+            <xf:send submission="led-change" ev:event="xforms-value-changed"/>
+      </xf:select1>
+      
+      <xf:submit submission="change-pattern">
          <xf:label>Submit</xf:label>
       </xf:submit>
-      -->
+      
+      <xf:submit submission="led-change">
+         <xf:label>LED State</xf:label>
+      </xf:submit>
+      
+      <xf:output ref="instance('spark-result')/spark-response-code">
+         <xf:label>Spark Response Code</xf:label>
+      </xf:output>
+      
       <xf:output ref="instance('spark-result')/response-time">
          <xf:label>Response Time (ms)</xf:label>
       </xf:output>
