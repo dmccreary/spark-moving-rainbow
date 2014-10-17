@@ -128,6 +128,14 @@ let $content :=
                <xf:label>Color All 200</xf:label>
                <xf:value>colorall200</xf:value>
             </xf:item>
+            <xf:item>
+               <xf:label>Random</xf:label>
+               <xf:value>random</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Candle Flicker</xf:label>
+               <xf:value>candle</xf:value>
+            </xf:item>
             <!-- fire off a new submisison any time this value changes -->
             <xf:send submission="change-pattern" ev:event="xforms-value-changed"/>
       </xf:select1>
