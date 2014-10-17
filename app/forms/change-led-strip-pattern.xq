@@ -113,6 +113,10 @@ let $content :=
                <xf:value>dim</xf:value>
             </xf:item>
             <xf:item>
+               <xf:label>Cyan</xf:label>
+               <xf:value>cyan</xf:value>
+            </xf:item>
+            <xf:item>
                <xf:label>Race</xf:label>
                <xf:value>race</xf:value>
             </xf:item>
@@ -129,12 +133,24 @@ let $content :=
                <xf:value>colorall200</xf:value>
             </xf:item>
             <xf:item>
-               <xf:label>Random</xf:label>
-               <xf:value>random</xf:value>
+               <xf:label>Random Color</xf:label>
+               <xf:value>random-color</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Random RGB</xf:label>
+               <xf:value>random-rgb</xf:value>
             </xf:item>
             <xf:item>
                <xf:label>Candle Flicker</xf:label>
                <xf:value>candle</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Cylon</xf:label>
+               <xf:value>cylon</xf:value>
+            </xf:item>
+            <xf:item>
+               <xf:label>Up Down</xf:label>
+               <xf:value>up-down</xf:value>
             </xf:item>
             <!-- fire off a new submisison any time this value changes -->
             <xf:send submission="change-pattern" ev:event="xforms-value-changed"/>

@@ -18,7 +18,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
 // name the pins
 int led1 = D0;
 int led2 = D2;
-char patternArr[255] = "rainbow";
+char patternArr[255]; // where we store our pattern
 String pattern(patternArr);
 
 // This routine runs only once upon reset
@@ -41,107 +41,124 @@ void setup()
    digitalWrite(led2, HIGH);
    
    strip.begin();
-   rainbow(20);
    strip.show(); // Initialize all pixels to 'off'
+   pattern = "colorwipe";
 }
 
 
 // This routine loops forever
 void loop()
 {
-if (pattern == "rainbow") {
-      rainbow(20);
-};
-if (pattern == "red") {
-  red();
-};
-
-if (pattern == "green") {
-  green();
-};
-
-if (pattern == "blue") {
-  blue();
-};
-
-if (pattern == "colorwipe") {
-  colorWipe(100, 20);
-};
-
-if (pattern == "indigo") {
-  indigo();
-};
-
-if (pattern == "color100") {
-  setColor(100);
-};
-
-if (pattern == "colorall200") {
-  colorAll(100, 20);
-};
-
-if (pattern == "random") {
-  random();;
-};
-
-if (pattern == "candle") {
-  candle();;
-};
-
-digitalWrite(led1, HIGH);
-delay(50);
-digitalWrite(led1, LOW);
+    if (pattern == "rainbow") {
+          rainbow(20);
+    };
+    
+    if (pattern == "red") {red();};
+    if (pattern == "green") {green();};
+    if (pattern == "blue") {blue();};
+    if (pattern == "yellow") {yellow();};
+    if (pattern == "orange") {orange();};
+    if (pattern == "purple") {purple();};
+    if (pattern == "cyan") {cyan();};
+    if (pattern == "white") {white();};
+    if (pattern == "dim") {dim();};
+    
+    if (pattern == "colorwipe") {
+      colorWipe(100, 100);
+    };
+    
+    if (pattern == "indigo") {
+      indigo();
+    };
+    
+    if (pattern == "color100") {
+      setColor(100);
+    };
+    
+    if (pattern == "colorall200") {
+      colorAll(100, 20);
+    };
+    
+    if (pattern == "random-color") {
+      randomColor();
+    };
+    
+    if (pattern == "random-rgb") {
+      randomRGB();
+    };
+    
+    if (pattern == "candle") {candle();};
+    if (pattern == "cylon") {cylon();};
+    if (pattern == "up-down") {upDown();};
+    
+    digitalWrite(led1, HIGH);
+    delay(50);
+    digitalWrite(led1, LOW);
 }
 
 // change the LED strip pattern
 int changePat(String newPattern) {
   if (newPattern == "rainbow") {
       pattern = "rainbow";
-      return 1;
-  };
-  if (newPattern == "red") {
-      pattern = "red";
-      return 2;
+      return 0;
   };
   
-  if (newPattern == "green") {
-      pattern = "green";
-      return 3;
-  };
-  
-  if (newPattern == "blue") {
-       pattern = "blue";
-      return 4;
-  };
-  
+  if (newPattern == "red")    {pattern = "red";    return 1;};
+  if (newPattern == "orange") {pattern = "orange"; return 2;};
+  if (newPattern == "yellow") {pattern = "yellow"; return 3;};
+  if (newPattern == "green")  {pattern = "green";  return 4;};
+  if (newPattern == "blue")   {pattern = "blue";   return 5;};
+  if (newPattern == "indigo") {pattern = "indigo"; return 6;};
+  if (newPattern == "violet") {pattern = "purple"; return 7;};
+  if (newPattern == "white")  {pattern = "white";  return 8;};
+  if (newPattern == "purple") {pattern = "purple"; return 9;};
+  if (newPattern == "cyan")   {pattern = "cyan";   return 10;};
+  if (newPattern == "dim")    {pattern = "dim";    return 11;};
+    
   if (newPattern == "colorwipe") {
        pattern = "colorwipe";
-      return 5;
+      return 12;
   };
   
   if (newPattern == "indigo") {
       pattern = "indigo";
-      return 6;
+      return 13;
   };
   
  if (newPattern == "color100") {
       pattern = "color100";
-      return 7;
+      return 14;
   };
   
   if (newPattern == "colorall200") {
       pattern = "colorall200";
-      return 8;
+      return 15;
   };
   
-  if (newPattern == "random") {
-      pattern = "random";
-      return 9;
+  if (newPattern == "random-color") {
+      pattern = "random-color";
+      return 16;
+  };
+  
+  if (newPattern == "random-rgb") {
+      pattern = "random-rgb";
+      return 17;
   };
   
   if (newPattern == "candle") {
       pattern = "candle";
-      return 9;
+      return 18;
+  };
+  
+  if (newPattern == "cylon") {
+      pattern = "cylon";
+      return 18;
+  };
+  
+  
+  if (newPattern == "up-down") {
+      pattern = "up-down";
+      return 18;
   };
   
   // named pattern not found
@@ -210,6 +227,54 @@ void indigo() {
     }
     strip.show();
 }
+
+void yellow() {
+   int i;
+    for(i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i, 255, 255, 0);
+    }
+    strip.show();
+}
+
+void orange() {
+   int i;
+   for(i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i, 255, 165, 0);
+    }
+    strip.show();
+}
+
+void white() {
+   int i;
+    for(i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i, 255, 255, 255);
+    }
+    strip.show();
+}
+
+void cyan() {
+   int i;
+    for(i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i, 0, 255, 255);
+    }
+    strip.show();
+}
+
+void purple() {
+   int i;
+    for(i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i, 128, 0, 128);
+    }
+    strip.show();
+}
+
+void dim() {
+   int i;
+    for(i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i, 10, 10, 10);
+    }
+    strip.show();
+}
   
 // set a static color
 void setColor(int color) {
@@ -246,14 +311,16 @@ void colorAll(uint32_t c, uint8_t wait) {
 
 // Fill the dots one after the other with a color, wait (ms) after each one
 void colorWipe(uint32_t c, uint8_t wait) {
+    for(byte color=0; color<=255; color=color + 32) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
-    strip.setPixelColor(i, c);
+    strip.setPixelColor(i, Wheel(color));
     strip.show();
     delay(wait);
   }
+  }
 }
 
-void random() {
+void randomRGB() {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
      strip.setPixelColor(i, random(255), random(255), random(255));
      strip.show();
@@ -271,4 +338,57 @@ void candle() {
      strip.show();
      delay(10);
   }
+}
+
+void randomColor() {
+int newColor;
+  for(uint16_t i=0; i<strip.numPixels(); i++) {
+     newColor = Wheel(random(255));
+     strip.setPixelColor(i, newColor);
+     strip.show();
+     delay(100);
+  }
+}
+
+
+// this one really sucks.  Need to put in multiple pixels with smooth scroll later
+void cylon() {
+    int np = strip.numPixels();
+    strip.begin();
+    strip.show();
+    // up
+    for(uint16_t i=0; i<np; i++) {
+        strip.setPixelColor(i, 255, 0, 0);
+        strip.show();
+        delay(100);
+        if (i < np)
+          strip.setPixelColor(i, 0, 0, 0);
+    };
+    // down
+     for(uint16_t i=np; i>0; i--) {
+        strip.setPixelColor(i, 255, 0, 0);
+        strip.show();
+        delay(100);
+        strip.setPixelColor(i, 0, 0, 0);
+    };
+}
+
+// should have color and delay
+void upDown() {
+    int np = strip.numPixels();
+    strip.begin();
+    strip.show();
+    // draw up
+    for(uint16_t i=0; i<np; i++) {
+        strip.setPixelColor(i, 0, 0, 100);
+        strip.show();
+        delay(50);
+    };
+    // down
+     for(uint16_t i=np; i>0; i--) {
+        strip.setPixelColor(i, 0, 0, 0);
+        strip.show();
+        delay(50);
+    };
+    
 }
