@@ -1,0 +1,10 @@
+Red, 121.2
+Orange 134.2
+Yellow 139.7
+Green 93.5
+Blue 92.8
+Indigo 87
+Violet 103
+White 148.3
+Dim 15.9
+
